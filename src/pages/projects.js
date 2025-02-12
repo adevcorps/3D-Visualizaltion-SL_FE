@@ -6,6 +6,7 @@ import Popup from './popup';
 import list from '../img/list.png';
 import menu from '../img/menu.png';
 import images from '../img/Frame.png';
+import blankImage from '../assets/img/blank.png';
 
 
 const Projects = () => {
@@ -37,13 +38,19 @@ const Projects = () => {
     fetchQRtepmlete(1);
   }, []);
 
+  const isImage = (url) => {
+    const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp', 'tiff'];
+    const ext = url?.split('.').pop()?.toLowerCase(); // Get the file extension
+    return imageExtensions.includes(ext);
+  };
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   return (
     <>
       <div className='admin-container'>
         <div className='main-content'>
           <div className='sidebar'>
-            <h2 style={{ color: 'white', fontSize: '25px', marginTop: '40px', textAlign:'center' }}>
+            <h2 style={{ color: 'white', fontSize: '25px', marginTop: '40px', textAlign: 'center' }}>
               New Project
             </h2>
             <div className="project-dropzone-container " style={{ padding: '50px' }} >
@@ -96,7 +103,7 @@ const Projects = () => {
                 <div className='imagegallery'>
                   {allproject.map((field, index) => (
                     <div className='hell-1'>
-                      <img className='showimgs' src={field.image} />
+                      <img className='showimgs' src={field.image && isImage(field.image) ? field.image : blankImage} />
                     </div>
                   ))}
                 </div>

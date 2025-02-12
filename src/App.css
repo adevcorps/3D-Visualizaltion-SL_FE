@@ -89,7 +89,7 @@ section #landing {
   border-radius: 10px;
   cursor: pointer;
   overflow: hidden;
-  border: solid #fff 1px;
+  /* border: solid #fff 1px; */
   box-shadow: 2px 2px 2px 2px rgba(255, 255, 255, 0.1);
 }
 
