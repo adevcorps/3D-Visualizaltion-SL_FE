@@ -1,0 +1,167 @@
+.admin-container {
+  display: flex;
+  flex-direction: column; 
+  height: 100vh;
+}
+
+.navbar {
+  background-color: #070a14;
+  color: white;
+  font-size: 1.5em;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo{
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.logo img{
+  margin-right: 10px;
+}
+.nav-menu{
+  display: flex;
+}
+.nav-menu a{
+  text-decoration: none;
+  color: white;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+}
+
+nav li {
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 5px 20px;
+  transition: background 0.3s ease;
+}
+
+nav li a {
+  font-weight: bold; /* Default color */
+  text-decoration: none; /* Remove underline */
+  transition: color 0.1s ease; /* Smooth color transition */
+}
+
+nav li:hover{
+  background: #131c38;
+}
+
+/* nav li:hover a{
+  color: #070a14;
+} */
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.logo h2{
+  text-decoration: none;
+  color: white;
+}
+
+.user-menu{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 20px;
+  cursor: pointer;
+  font-size: 20px;
+  margin-right: 5px;
+  position: relative;
+}
+
+.user-menu:hover {
+  background-color: #131c38;
+}
+
+.user-menu:focus {
+  background-color: #131c38;
+}
+
+.user-menu img{
+  margin-right: 10px;
+}
+
+/* User drop down menu */
+.dropdown-menu {
+  position: absolute;
+  top: 64px;  /* Position the dropdown below the avatar */
+  right: 0;
+  background-color: #131c38;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  padding: 5px 0;
+  z-index: 10;
+}
+
+.dropdown-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-menu li {
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.dropdown-menu li:hover {
+  background-color: #222b50;
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+}
+
+.left-panel {
+  position: sticky;
+  background-color: #2c3e50;
+  color: white;
+  width: 250px; 
+  padding: 20px;
+  box-sizing: border-box;
+  height: 100%; 
+}
+
+.right-panel {
+  flex: 1; 
+  background-color: #ecf0f1;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  .left-panel {
+    width: 200px;
+  }
+  .right-panel {
+    padding: 10px;
+  }
+}
