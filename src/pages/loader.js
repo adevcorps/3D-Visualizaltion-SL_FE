@@ -27,31 +27,31 @@ const Loader = ({ Close }) => {
   const [tracking_number, settracking_number] = useState('')
 
   const onDrop = (acceptedFiles) => {
-    console.log('Files dropped:', acceptedFiles);
+    console.log('Files dropped loader:', acceptedFiles);
     // Add logic to handle the files
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   return (
     <>
-      <div class="loader">
-        <div class="loading-text">
-          Loading<span class="dot">.</span><span class="dot">.
-          </span><span class="dot">.</span>
+      <div className="loader">
+        <div className="loading-text">
+          Loading<span className="dot">.</span><span className="dot">.
+          </span><span className="dot">.</span>
         </div>
-        <div class="loading-bar-background">
-          <div class="loading-bar">
-            <div class="white-bars-container">
-              <div class="white-bar"></div>
-              <div class="white-bar"></div>
-              <div class="white-bar"></div>
-              <div class="white-bar"></div>
-              <div class="white-bar"></div>
-              <div class="white-bar"></div>
-              <div class="white-bar"></div>
-              <div class="white-bar"></div>
-              <div class="white-bar"></div>
-              <div class="white-bar"></div>
+        <div className="loading-bar-background">
+          <div className="loading-bar">
+            <div className="white-bars-container">
+              <div className="white-bar"></div>
+              <div className="white-bar"></div>
+              <div className="white-bar"></div>
+              <div className="white-bar"></div>
+              <div className="white-bar"></div>
+              <div className="white-bar"></div>
+              <div className="white-bar"></div>
+              <div className="white-bar"></div>
+              <div className="white-bar"></div>
+              <div className="white-bar"></div>
             </div>
           </div>
         </div>

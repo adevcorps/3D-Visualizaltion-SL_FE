@@ -12,14 +12,16 @@ const Landing = () => {
   const handleregister = () => {
     navigate('/signup');
   }
-  const [show, setshow] = useState(false)
-  const [r, setr] = useState('')
+  const [isLoading, setIsLoading] = useState(false);
+  // const [show, setshow] = useState(false)
+  // const [r, setr] = useState('')
   const [showpopup, setPopup] = useState(false)
-  const [showloader, setLoader] = useState(false)
-  let data = '';
-  const [tracking_number, settracking_number] = useState('')
+  // const [showloader, setLoader] = useState(false)
+  // let data = '';
+  // const [tracking_number, settracking_number] = useState('')
   const onDrop = (acceptedFiles) => {
-    console.log('Files dropped:', acceptedFiles);
+    setIsLoading(true);
+    console.log('Files dropped landing:', acceptedFiles);
     acceptedFiles.forEach(file => {
       getImageFileObjects(file);
     });
@@ -29,8 +31,8 @@ const Landing = () => {
   }
 
   async function getImageFileObjects(file) {
-    console.log('File:', file);
-    setLoader(true)
+    console.log('File landing:', file);
+    // setLoader(true)
     if (file instanceof Blob || file instanceof File) {
       try {
         const uploadPreset = "tixx1a8u"; // Your Cloudinary upload preset
@@ -44,9 +46,10 @@ const Landing = () => {
         });
         const data = await response.json();
         if (response.ok) {
+          setIsLoading(false);
           console.log('Upload successful:', data.url);
           localStorage.setItem('uploadedImageUrl', data.url);
-          setLoader(false)
+          // setLoader(false)
           setPopup(true)
         } else {
           console.error('Upload failed:', data.error.message);
@@ -69,13 +72,21 @@ const Landing = () => {
 
   return (
     <>
+      {
+        isLoading &&
+        <div className="loading-overlay">
+          <div className="loading-spinner"></div>
+          <br />
+          <p className="loading-label">Uploading...</p>
+        </div>
+      }
       <section id="landing">
-        {
+        {/* {
           showloader &&
           <div style={{ width: '100%', position: 'absolute', top: 10 }}>
             <Loader />
           </div>
-        }
+        } */}
         <div className="container">
           <div className='main'>
             <div className="dropzone-container" >
