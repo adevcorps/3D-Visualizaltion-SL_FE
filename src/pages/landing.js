@@ -101,12 +101,10 @@ const Landing = () => {
                     <line x1="12" y1="2" x2="12" y2="22"></line>
                   </svg>
                 </div>
-                {/* <p>{isDragActive ? "Drop the files here..." : "Drag and drop a Folder to create a new project"}</p> */}
                 <p>
                   Drag and drop a Folder to
                   <br />
                   create a new project
-
                 </p>
               </div>
             </div>
