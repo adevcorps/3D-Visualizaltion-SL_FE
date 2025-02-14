@@ -25,64 +25,48 @@ export const Rendering = () => {
     function PointCloud() {
         const pointsRef = useRef();
 
-        // Generate Perlin noise for terrain generation
-        const generatePerlinNoise = (width, height, scale = 1) => {
-            const noise = [];
-            for (let y = 0; y < height; y++) {
-                noise[y] = [];
-                for (let x = 0; x < width; x++) {
-                    noise[y][x] = Math.sin(x / scale) * Math.cos(y / scale) * Math.sin((x + y) / (scale * 2));
-                }
-            }
-            return noise;
-        };
+        const generateLidarPointCloud = (width = 20, depth = 20, height = 10, density = 10000) => {
+            const points = [];
 
-        // Generate points for the mountain
-        const generateMountainPoints = (width = 100, height = 100, scale = 10, numPoints = 5000) => {
-            const positions = [];
-            const colors = [];
+            for (let i = 0; i < density; i++) {
+                const x = Math.random() * width - width / 2;
+                const y = Math.random() * height - height / 2;
+                const z = Math.random() * depth - depth / 2;
 
-            // Generate terrain based on Perlin noise
-            const terrainNoise = generatePerlinNoise(width, height, scale);
+                // Adding some noise to simulate real-world data
+                const noiseX = Math.random() * 0.2 - 0.1;  // Small random noise in X-axis
+                const noiseY = Math.random() * 0.2 - 0.1;  // Small random noise in Y-axis
+                const noiseZ = Math.random() * 0.2 - 0.1;  // Small random noise in Z-axis
 
-            // Randomly sample points from the terrain
-            for (let i = 0; i < numPoints; i++) {
-                const x = Math.floor(Math.random() * width);
-                const y = Math.floor(Math.random() * height);
-                const z = terrainNoise[y][x] * 8;  // Increase height multiplier for more varied terrain
-
-                // Push the point coordinates and random colors
-                positions.push((x - width / 2) * 0.2, (y - height / 2) * 0.2, z);
-                colors.push(Math.random() * 0.4 + 0.3);
-                colors.push(Math.random() * 0.4 + 0.3);
-                colors.push(Math.random() * 0.4 + 0.3);
+                points.push(x + noiseX, y + noiseY, z + noiseZ);
             }
 
-            return { positions, colors };
+            return points;
         };
 
-        const { positions, colors } = generateMountainPoints(100, 100, scale, density);
+        // Generate LiDAR points for a terrain/building shape
+        const lidarPoints = generateLidarPointCloud(30, 30, 20, 50000);
 
-        // BufferGeometry for point cloud
+        // Create geometry and material for the point cloud
         const geometry = new THREE.BufferGeometry();
-        const positionAttribute = new THREE.Float32BufferAttribute(positions, 3);
+        const positionArray = new Float32Array(lidarPoints);
+        const positionAttribute = new THREE.BufferAttribute(positionArray, 3);
         geometry.setAttribute('position', positionAttribute);
-        const colorAttribute = new THREE.Float32BufferAttribute(colors, 3);
-        geometry.setAttribute('color', colorAttribute);
 
-        // Material for the points
         const material = new THREE.PointsMaterial({
-            size: size,
-            vertexColors: true,
+            color: 0x00ff00,  // Point color (green)
+            size: 0.1,       // Size of each point
             sizeAttenuation: true,
         });
+
+
 
         return <points ref={pointsRef} geometry={geometry} material={material} />;
     }
 
     return (
         <>
-            <Canvas style={{ height: '100vh', width: '100vw', background: 'white' }} camera={{ position: [0, 0, 5], fov: 75 }}>
+            <Canvas style={{ height: '100vh', width: '100%' }} camera={{ position: [0, 0, 5], fov: 75 }}>
                 <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={75} />
                 <OrbitControls />
                 <PointCloud scale={scale} />
