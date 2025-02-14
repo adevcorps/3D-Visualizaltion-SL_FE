@@ -1,0 +1,11 @@
+.pc-panel-container{
+    position: absolute;
+    z-index: 10;
+    top: 65 !important;
+    width: 100%;
+
+}
+
+.pc-panel{
+    z-index: 10;
+}
