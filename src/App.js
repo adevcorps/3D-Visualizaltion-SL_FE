@@ -4,6 +4,7 @@ import Landing from './pages/landing';
 import Popup from './pages/popup';
 import Projects from './pages/projects';
 import { Header } from './components/header';
+import {Rendering} from "./pages/rendering";
 import './App.css';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Landing />} />
+          <Route path="/render" element={<Rendering />} />
           <Route path="/popup" element={<Popup />} />
           <Route path="/projects" element={<Projects />} />
         </Routes>

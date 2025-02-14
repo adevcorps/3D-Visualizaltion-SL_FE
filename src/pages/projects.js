@@ -23,7 +23,6 @@ const Projects = () => {
   const onDrop = (acceptedFiles) => {
     console.log('Files dropped:', acceptedFiles);
     setPopup(true)
-    // Add logic to handle the files
   };
   const fetchQRtepmlete = async () => {
     try {
@@ -75,7 +74,6 @@ const Projects = () => {
                     <line x1="12" y1="2" x2="12" y2="22"></line>
                   </svg>
                 </div>
-
                 <p>
                   Drag and drop a Folder to
                   create a new project or select

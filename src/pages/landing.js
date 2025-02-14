@@ -13,18 +13,23 @@ const Landing = () => {
     navigate('/signup');
   }
   const [isLoading, setIsLoading] = useState(false);
-  // const [show, setshow] = useState(false)
-  // const [r, setr] = useState('')
-  const [showpopup, setPopup] = useState(false)
-  // const [showloader, setLoader] = useState(false)
-  // let data = '';
-  // const [tracking_number, settracking_number] = useState('')
+  const [showpopup, setPopup] = useState(false);
+  const [uploadedImgs, setUploadedImgs] = useState([]);
+
   const onDrop = (acceptedFiles) => {
     setIsLoading(true);
-    console.log('Files dropped landing:', acceptedFiles);
-    acceptedFiles.forEach(file => {
-      getImageFileObjects(file);
-    });
+    const uploadPromises = acceptedFiles.map(file => getImageFileObjects(file));
+    Promise.all(uploadPromises)
+      .then(() => {
+        localStorage.setItem('uploadedImgs', uploadedImgs);
+        setIsLoading(false);
+        setPopup(true);
+        console.log(uploadedImgs);
+      })
+      .catch((error) => {
+        console.error('Error uploading files:', error);
+        setIsLoading(false);
+      });
   };
   const Closepop = () => {
     setPopup(false)
@@ -32,25 +37,23 @@ const Landing = () => {
 
   async function getImageFileObjects(file) {
     console.log('File landing:', file);
-    // setLoader(true)
     if (file instanceof Blob || file instanceof File) {
       try {
-        const uploadPreset = "tixx1a8u"; // Your Cloudinary upload preset
+        const uploadPreset = "tixx1a8u";
         const formData = new FormData();
-        formData.append('file', file); // Add the file to the form data
-        formData.append('upload_preset', uploadPreset); // Add your upload preset
-
+        formData.append('file', file);
+        formData.append('upload_preset', uploadPreset);
         const response = await fetch(`https://api.cloudinary.com/v1_1/degjqq6vo/upload`, {
           method: 'POST',
           body: formData,
         });
         const data = await response.json();
         if (response.ok) {
-          setIsLoading(false);
-          console.log('Upload successful:', data.url);
-          localStorage.setItem('uploadedImageUrl', data.url);
-          // setLoader(false)
-          setPopup(true)
+          setUploadedImgs(prevImgs => {
+            const updatedImgs = [...prevImgs, data.url];
+            return updatedImgs;
+          });
+
         } else {
           console.error('Upload failed:', data.error.message);
         }
@@ -81,19 +84,12 @@ const Landing = () => {
         </div>
       }
       <section id="landing">
-        {/* {
-          showloader &&
-          <div style={{ width: '100%', position: 'absolute', top: 10 }}>
-            <Loader />
-          </div>
-        } */}
         <div className="container">
           <div className='main'>
             <div className="dropzone-container" >
               <input {...getInputProps()} />
               <div className="dropzone-box" {...getRootProps()}>
                 <div className="drag-icon">
-                  {/* Replace with your custom SVG icon or image */}
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -101,7 +97,6 @@ const Landing = () => {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    // className="feather feather-move"
                     className='drag-svg-icon'
                   >
                     <polyline points="5 9 2 12 5 15"></polyline>
@@ -126,7 +121,7 @@ const Landing = () => {
         showpopup &&
         <div>
           <div className="popup">
-            <Popup Close={Closepop} />
+            <Popup uploadedImgs={uploadedImgs} Close={Closepop} />
           </div>
         </div>
       }

@@ -28,7 +28,6 @@ const Loader = ({ Close }) => {
 
   const onDrop = (acceptedFiles) => {
     console.log('Files dropped loader:', acceptedFiles);
-    // Add logic to handle the files
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });

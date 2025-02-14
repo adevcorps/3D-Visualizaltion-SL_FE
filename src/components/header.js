@@ -47,6 +47,9 @@ export const Header = () => {
                             <li>
                                 <Link to="/projects">PROJECTS</Link>
                             </li>
+                            <li>
+                                <Link to="/render">RENDER</Link>
+                            </li>
                         </ul>
                     </nav>
                 </div>
