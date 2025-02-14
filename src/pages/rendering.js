@@ -8,14 +8,14 @@ export const Rendering = () => {
     const meshRef = useRef();  // Reference to the mesh
     const [rotation, setRotation] = useState([0, 0, 0]);
     useEffect(() => {
-        const interval = setInterval(() => {
-            setRotation((prevRotation) => [
-                prevRotation[0] + 0.01,  // Rotate on X axis
-                prevRotation[1] + 0.01,  // Rotate on Y axis
-                prevRotation[2] + 0.01   // Rotate on Z axis
-            ]);
-        }, 100);
-        return () => clearInterval(interval); // Clean up the interval on unmount
+        // const interval = setInterval(() => {
+        //     setRotation((prevRotation) => [
+        //         prevRotation[0] + 0.01,  // Rotate on X axis
+        //         prevRotation[1] + 0.01,  // Rotate on Y axis
+        //         prevRotation[2] + 0.01   // Rotate on Z axis
+        //     ]);
+        // }, 100);
+        // return () => clearInterval(interval); // Clean up the interval on unmount
     }, []);
 
     return (
