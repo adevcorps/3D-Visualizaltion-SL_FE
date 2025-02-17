@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom'
 import * as THREE from 'three'
 // import { PlaneBufferGeometry } from 'three';
 import { Canvas, extend, useThree, useFrame } from 'react-three-fiber'
-import DatGui, { DatNumber, DatColor } from '@tim-soft/react-dat-gui'
+// import DatGui, { DatNumber, DatColor } from '@tim-soft/react-dat-gui'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import generateHeight from './generateHeight'
 import '../assets/css/panel.css'
@@ -143,7 +143,7 @@ class Panel extends Component {
                 </Canvas>
                 <h1>end canvas</h1>
 
-                <DatGui data={data} onUpdate={this.handleUpdate} className="react-dat-gui-relative-position">
+                {/* <DatGui data={data} onUpdate={this.handleUpdate} className="react-dat-gui-relative-position">
                     <DatNumber path="dotSize" label="dotSize" min={0.1} max={3} step={0.01} />
                     <DatNumber path="geometrySize" label="geometrySize" min={1000} max={10000} step={10} />
                     <DatNumber path="depthDensity" label="depthDensity" min={32} max={512} step={64} />
@@ -151,7 +151,7 @@ class Panel extends Component {
                     <DatNumber path="heightMultiplier" label="heightMultiplier" min={1} max={50} step={1} />
                     <DatNumber path="mountainVariation" label="mountainVariation" min={0} max={50} step={1} />
                     <DatColor path="dotColor" label="dotColor" />
-                </DatGui>
+                </DatGui> */}
                 <p style={{ position: 'fixed', bottom: 0 }}>You can use orbit controls</p>
             </>
         )
